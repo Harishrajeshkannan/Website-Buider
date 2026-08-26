@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-label="Project preview unavailable">
+  <rect width="1600" height="1000" fill="#f0efec"/>
+  <g fill="none" stroke="#d8d5ce" stroke-width="2">
+    <path d="M0 0l1600 1000M1600 0L0 1000"/>
+  </g>
+  <text x="800" y="510" font-family="Georgia, serif" font-size="42" fill="#9a9790" text-anchor="middle">Preview unavailable</text>
+</svg>
