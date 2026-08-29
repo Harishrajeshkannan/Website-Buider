@@ -39,8 +39,8 @@ export async function createInquiry(
         message: parsed.data.message,
       })
       .select("*")
-      .single()
-      .abortSignal(signal);
+      .abortSignal(signal)
+      .single();
     if (error) throw new Error(error.message);
     return mapInquiry(data);
   });
@@ -56,8 +56,8 @@ export async function getInquiry(
       .from("inquiries")
       .select("*")
       .eq("id", id)
-      .maybeSingle()
-      .abortSignal(signal);
+      .abortSignal(signal)
+      .maybeSingle();
     if (error) throw new Error(error.message);
     return data ? mapInquiry(data) : null;
   });

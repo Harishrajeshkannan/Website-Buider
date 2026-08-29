@@ -1,5 +1,5 @@
 import "server-only";
-import { createClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import {
   type LockoutState,
   initialLockoutState,
@@ -32,15 +32,20 @@ function normalizeKey(email: string): string {
   return email.trim().toLowerCase();
 }
 
+type AuthAttemptRow = {
+  failed_count: number | null;
+  locked_until: string | null;
+};
+
 async function readState(
-  client: ReturnType<typeof createClient>,
+  client: SupabaseClient,
   accountKey: string,
 ): Promise<LockoutState> {
   const { data } = await client
     .from("auth_attempts")
     .select("failed_count, locked_until")
     .eq("account_key", accountKey)
-    .maybeSingle();
+    .maybeSingle<AuthAttemptRow>();
   if (!data) return initialLockoutState;
   return {
     failedCount: data.failed_count ?? 0,
@@ -51,7 +56,7 @@ async function readState(
 }
 
 async function writeState(
-  client: ReturnType<typeof createClient>,
+  client: SupabaseClient,
   accountKey: string,
   state: LockoutState,
 ): Promise<void> {

@@ -41,8 +41,8 @@ export async function getProjectBySlug(
       .from("projects")
       .select("*, testimonials(*)")
       .eq("slug", slug)
-      .maybeSingle()
-      .abortSignal(signal);
+      .abortSignal(signal)
+      .maybeSingle();
     if (error) throw new Error(error.message);
     return data ? mapProject(data) : null;
   });
@@ -72,8 +72,8 @@ export async function getSiteContent(): Promise<
       .from("site_content")
       .select("*")
       .limit(1)
-      .maybeSingle()
-      .abortSignal(signal);
+      .abortSignal(signal)
+      .maybeSingle();
     if (error) throw new Error(error.message);
     return data ? mapSiteContent(data) : null;
   });
@@ -88,8 +88,8 @@ export async function getTestimonialForProject(
       .from("testimonials")
       .select("*")
       .eq("project_id", projectId)
-      .maybeSingle()
-      .abortSignal(signal);
+      .abortSignal(signal)
+      .maybeSingle();
     if (error) throw new Error(error.message);
     return data ? mapTestimonial(data) : null;
   });

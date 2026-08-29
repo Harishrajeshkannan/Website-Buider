@@ -96,8 +96,8 @@ export async function createProject(
       .from("projects")
       .insert(toDbRow(parsed.data))
       .select("id")
-      .single()
-      .abortSignal(signal);
+      .abortSignal(signal)
+      .single();
     if (error) throw new Error(error.message);
 
     await syncTestimonial(supabase, data.id, parsed.data.testimonial);
@@ -183,8 +183,8 @@ export async function createWebsiteType(
         sort_order: parsed.data.sortOrder,
       })
       .select("*")
-      .single()
-      .abortSignal(signal);
+      .abortSignal(signal)
+      .single();
     if (error) throw new Error(error.message);
     return mapWebsiteType(data);
   });
@@ -231,8 +231,8 @@ export async function upsertSiteContent(
         { onConflict: "singleton" },
       )
       .select("*")
-      .single()
-      .abortSignal(signal);
+      .abortSignal(signal)
+      .single();
     if (error) throw new Error(error.message);
     return mapSiteContent(data);
   });
